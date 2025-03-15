@@ -57,5 +57,26 @@ def add_product():
     
     return render_template('add_product.html')
 
+@app.route('/delete/<int:product_id>', methods=['POST'])
+def delete_product(product_id):
+    # Fetch product details to get the image URL
+    cursor.execute("SELECT ImageUrl FROM dbo.Products WHERE Id = ?", (product_id,))
+    product = cursor.fetchone()
+
+    if product and product.ImageUrl:
+        # Extract blob name from URL
+        blob_url = product.ImageUrl
+        blob_name = blob_url.split("/")[-1]
+
+        # Delete from Blob Storage
+        blob_client = blob_service_client.get_blob_client(container=BLOB_CONTAINER_NAME, blob=blob_name)
+        blob_client.delete_blob()
+
+    # Delete from SQL Database
+    cursor.execute("DELETE FROM dbo.Products WHERE Id = ?", (product_id,))
+    conn.commit()
+
+    return redirect(url_for('list_products'))
+
 if __name__ == '__main__':
     app.run(debug=True)
