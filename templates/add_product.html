@@ -1,103 +1,41 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cost Forecast & Anomaly Detection</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            text-align: center;
-            padding: 20px;
-        }
-        .btn {
-            display: inline-block;
-            padding: 10px 20px;
-            font-size: 18px;
-            background-color: blue;
-            color: white;
-            border: none;
-            cursor: pointer;
-            text-decoration: none;
-            border-radius: 5px;
-            margin: 10px;
-        }
-        .forecast, .anomaly {
-            display: none;
-            text-align: center;
-            margin-top: 20px;
-            padding: 10px;
-            border-radius: 5px;
-            max-width: 600px;
-            margin: auto;
-        }
-        .forecast {
-            background-color: lightblue;
-        }
-        .anomaly {
-            background-color: lightgreen;
-        }
-    </style>
-    <script>
-        function showForecast() {
-            document.getElementById("forecastSection").style.display = "block";
-            document.getElementById("anomalySection").style.display = "none";
-        }
-        function showAnomaly() {
-            document.getElementById("forecastSection").style.display = "none";
-            document.getElementById("anomalySection").style.display = "block";
-        }
-    </script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Add New Product</title>
 </head>
 <body>
-
-    <h1>Cost Analysis Dashboard</h1>
-    <button class="btn" onclick="showForecast()">Predict Next 30 Days</button>
-    <button class="btn" onclick="showAnomaly()">Check for Anomalies</button>
-
-    <div id="forecastSection" class="forecast">
-        <h2>Cost Forecast</h2>
-        <p><strong>Latest Cost:</strong> $4975.2</p>
-        <p><strong>Average Cost:</strong> $3708.49</p>
-        <h3>Next 30 Days Forecast</h3>
-        <ul>
-            <li>Day 1: $3097.96</li>
-            <li>Day 2: $3278.02</li>
-            <li>Day 3: $3355.24</li>
-            <li>Day 4: $3855.22</li>
-            <li>Day 5: $3266.57</li>
-            <li>Day 6: $3599.42</li>
-            <li>Day 7: $3452.03</li>
-            <li>Day 8: $3497.04</li>
-            <li>Day 9: $3469.30</li>
-            <li>Day 10: $3368.05</li>
-            <li>Day 11: $3463.37</li>
-            <li>Day 12: $3500.72</li>
-            <li>Day 13: $3488.99</li>
-            <li>Day 14: $3495.77</li>
-            <li>Day 15: $3487.78</li>
-            <li>Day 16: $3496.96</li>
-            <li>Day 17: $3489.00</li>
-            <li>Day 18: $3493.18</li>
-            <li>Day 19: $3491.80</li>
-            <li>Day 20: $3492.81</li>
-            <li>Day 21: $3491.47</li>
-            <li>Day 22: $3492.71</li>
-            <li>Day 23: $3491.86</li>
-            <li>Day 24: $3492.31</li>
-            <li>Day 25: $3492.10</li>
-            <li>Day 26: $3492.27</li>
-            <li>Day 27: $3492.08</li>
-            <li>Day 28: $3492.24</li>
-            <li>Day 29: $3492.14</li>
-            <li>Day 30: $3492.19</li>
-        </ul>
+  <h1>Add a New Product</h1>
+  <form action="/add" method="post" enctype="multipart/form-data">
+    <div>
+      <label for="name">Name:</label>
+      <input type="text" id="name" name="name" required placeholder="Enter product name">
     </div>
-
-    <div id="anomalySection" class="anomaly">
-        <h2>Anomaly Detection</h2>
-        <p><strong>Anomaly Detected:</strong> No</p>
+    
+    <div>
+      <label for="description">Description:</label>
+      <textarea id="description" name="description" required placeholder="Enter product description"></textarea>
     </div>
-
+    
+    <div>
+      <label for="price">Price:</label>
+      <input type="number" id="price" step="0.01" name="price" required placeholder="Enter price">
+    </div>
+    
+    <div>
+      <label for="category">Category:</label>
+      <input type="text" id="category" name="category" required placeholder="Enter product category">
+    </div>
+    
+    <div>
+      <label for="image">Product Image:</label>
+      <input type="file" id="image" name="image" accept="image/*">
+    </div>
+    
+    <button type="submit">Add Product</button>
+  </form>
+  
+  <a href="/">Back to Product List</a>
 </body>
 </html>
